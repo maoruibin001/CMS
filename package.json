@@ -1,0 +1,19 @@
+{
+  "name": "maoruibin",
+  "version": "0.1.0",
+  "description": "",
+  "main": "bin/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "hotnode bin/www"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.10.4"
+  }
+}

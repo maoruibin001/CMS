@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>news list</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <style type="text/css">
+        body {
+            margin: 50px;
+        }
+        .pagination li {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="webapp" ng-controller="news">
+    <div class="container">
+        <div>
+
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#create">创建新闻</button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="createLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="createLabel">创建</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">标题</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="title" placeholder="请输入新闻标题" ng-model="news.title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="col-sm-2 control-label">内容</label>
+                                    <div class="col-sm-10">
+                                        <textarea id="content" cols="60" rows="10" placeholder="请输入新闻内容" ng-model="news.content"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox">请记住我
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <span class="text-danger">{{errorMsg}}</span>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" ng-click="save()">提交</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+
+
+        </div>
+        <div>
+            <!-- 按钮触发模态框 -->
+            <!--<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>-->
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="detailLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="detailLabel">创建时间：{{itemNews.time | format:'YYYY-MM-DD hh:mm:ss'}}</h4>
+                            <h4 class="modal-title" id="detailLabel2">标题：{{itemNews.title}}</h4>
+                        </div>
+                        <div class="modal-body">{{itemNews.content}}</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div class="page-header">
+            <h1>新闻列表</h1>
+            <table class="table table-striped">
+                <caption>精简表格布局</caption>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>创建时间</th>
+                    <th>标题</th>
+                    <th>内容</th></tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in list" ng-click="showDetail(item._id)">
+                    <td ng-bind="$index + 1"></td>
+                    <td ng-bind="item.time | format:'YYYY-MM-DD hh:mm:ss'"></td>
+                    <td ng-bind="item.title"></td>
+                    <td ng-bind="item.abstract"></td></tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li><a href="javascipt:void(0)" ng-click="queryPage('pre')">&laquo;</a></li>
+                <li ng-repeat="i in pageSet track by $index" on-finish-render-filters>
+                    <a href="javascipt:void(0)" ng-click="queryPage($index + 1)">{{$index + 1}}</a>
+                </li>
+                <li><a href="javascipt:void(0)" ng-click="queryPage('next')">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/moment/moment.js"></script>
+<script src="node_modules/jquery/dist/jquery.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="./app.js"></script>
+
+<script src="filter/news.client.filter.js"></script>
+<script src="directive/news.client.directive.js"></script>
+<script src="service/news.client.service.js"></script>
+<script src="controller/news.client.controller.js"></script>
+
+</body>
+</html>
