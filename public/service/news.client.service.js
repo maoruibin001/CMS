@@ -13,9 +13,11 @@ function requestHandle($http, $q) {
         }
 
         if (method === "POST") {
-            config.data = params
+            config.data = params;
         } else {
-            config.params = params
+            config.params = params || {};
+            //处理ie缓存get请求的问题。
+            config.params.__nowTime__ = new Date().getTime();
         }
         $http(config)
             .then(function(resData) {

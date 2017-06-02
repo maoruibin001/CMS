@@ -2,14 +2,9 @@
  * Created by lenovo on 2017/5/24.
  */
 const mongoose = require('mongoose');
-const TestSchema = new mongoose.Schema({
-    title : { type:String },//属性title,类型为String
-    content : { type:String },//属性content,类型为String
-    abstract: {type: String}, //属性abstract,类型为String
-    time : { type:Date, default:Date.now }
-});
+
 const ABSTRACTLENGTH = 20;
-let News = mongoose.model('News', TestSchema);
+let News = mongoose.model('News');
 module.exports = {
     create(req, res, next) {
         const news = new News(req.body);
