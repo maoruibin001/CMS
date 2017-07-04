@@ -1,0 +1,43 @@
+/*滚动条宽度*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4);
+}
+
+body {
+    margin: 50px;
+}
+.pagination li {
+    display: inline;
+}
+.list {
+    cursor: pointer;
+}
+.list:hover {
+    background-color: #ccc !important;
+}
+
+.maxH-400 {
+    max-height: 400px;
+    overflow-y:auto;
+}
+.disabled {
+    background-color: #ccc !important;
+    cursor: not-allowed;
+}
+.h-420 {
+    height: 420px;
+}
