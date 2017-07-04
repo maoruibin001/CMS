@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const config = require('./config');
 
 module.exports = function() {
-    const db = mongoose.connect(config.mongodb);
+    mongoose.Promise = global.Promise;
+    const db = mongoose.connect(config.mongodb, {useMongoClient: true});
     const TestSchema = new mongoose.Schema({
         title : { type:String },//属性title,类型为String
         content : { type:String },//属性content,类型为String

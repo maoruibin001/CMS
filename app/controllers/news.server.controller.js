@@ -20,13 +20,20 @@ module.exports = {
     },
     list(req, res, next) {
         let pageSize = parseInt(req.query.pageSize) || 10,
-            pageNo = parseInt(req.query.pageNo) || 1;
+            pageNo = parseInt(req.query.pageNo) || 1,
+            title = req.query.title;
+        let query = {};
+        if (title) {
+            query = {"title": {$regex: title, $options:'i'}}
+        } else {
+            query = {};
+        }
         var count  = 0;
-        News.find().count().exec(function(err, totalCount) {
+        News.find(query).count().exec(function(err, totalCount) {
             if (err) {
                 return;
             }
-            News.find()
+            News.find(query)
                 .skip((pageNo - 1) * pageSize)
                 .limit(pageSize)
                 .exec(function(err, doc) {

@@ -11,7 +11,9 @@ function controllerHandler($scope, request) {
     $scope.pageSet = [];
     $scope.pageNo = 1;
     $scope.pageIndex = 0;
-
+    $scope.totalCount = 0;
+    $scope.pageSize = 8;
+    $scope.query = {};
 
     // 刷新active
     $scope.resetActive = function() {
@@ -25,14 +27,15 @@ function controllerHandler($scope, request) {
     // 监听新闻列表循环结束
     $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
         $scope.resetActive();
-    })
+    });
 
     //查询新闻列表
     $scope.queryList = function(no) {
         let pageNo = no || $scope.pageNo;
         $scope.pageNo = pageNo;
-        request.list({pageNo: pageNo}).then(function(data) {
+        request.list({pageNo: pageNo, pageSize: $scope.pageSize, title: $scope.query.title}).then(function(data) {
             $scope.list = data.model.list;
+            $scope.totalCount = data.model.totalCount;
             let pageIndex = Math.ceil(data.model.totalCount / data.model.pageSize)
             $scope.pageIndex = pageIndex;
             $scope.pageSet = [];

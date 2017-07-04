@@ -6,6 +6,9 @@ angular.module('webapp')
 
 function requestHandle($http, $q) {
     function requestSync(url, method, params) {
+        // for(let k in params) {
+        //     if (params[k]) params[k] = encodeURI(params[k]);
+        // }
         let deffer = $q.defer();
         const config = {
             method: method,
